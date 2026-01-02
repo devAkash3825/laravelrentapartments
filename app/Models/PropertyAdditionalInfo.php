@@ -27,4 +27,33 @@ class PropertyAdditionalInfo extends Model
     {
         return $this->belongsTo(PropertyInfo::class, 'PropertyId', 'Id');
     }
+
+    /* =====================
+     | Helper Methods
+     |=====================*/
+
+    public function hasLeasingTerms()
+    {
+        return !empty($this->LeasingTerms);
+    }
+
+    public function hasPetPolicy()
+    {
+        return !empty($this->PetPolicy);
+    }
+
+    public function hasParking()
+    {
+        return !empty($this->Parking);
+    }
+
+    public function hasNeighborhood()
+    {
+        return !empty($this->Neighborhood);
+    }
+
+    public function hasDrivingDirections()
+    {
+        return !empty($this->drivedirection);
+    }
 }

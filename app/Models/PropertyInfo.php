@@ -100,4 +100,104 @@ class PropertyInfo extends Model
     {
         return $this->belongsTo(State::class, 'state_id');
     }
+
+    public function user()
+    {
+        return $this->login(); // Alias for better readability
+    }
+
+    public function billCity()
+    {
+        return $this->belongsTo(City::class, 'BillCity', 'Id');
+    }
+
+    /* =====================
+     | Scopes
+     |=====================*/
+
+    public function scopeActive($query)
+    {
+        return $query->where('Status', '1');
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('Featured', '1');
+    }
+
+    public function scopeActiveOnSearch($query)
+    {
+        return $query->where('ActiveOnSearch', '1');
+    }
+
+    /* =====================
+     | Helper Methods
+     |=====================*/
+
+    public function getFullAddress()
+    {
+        $parts = array_filter([
+            $this->Address,
+            $this->Area,
+            $this->city?->CityName,
+            $this->state?->StateName,
+            $this->Zip
+        ]);
+        
+        return implode(', ', $parts);
+    }
+
+    public function getCoordinates()
+    {
+        if ($this->latitude && $this->longitude) {
+            return [
+                'lat' => $this->latitude,
+                'lng' => $this->longitude
+            ];
+        }
+        return null;
+    }
+
+    public function hasFloorPlans()
+    {
+        return $this->floorPlans()->where('Status', '1')->exists();
+    }
+
+    public function hasGallery()
+    {
+        return $this->galleries()->where('Status', '1')->exists();
+    }
+
+    public function getPropertyImage()
+    {
+        if ($this->PictureName) {
+            return asset('uploads/properties/' . $this->PictureName);
+        }
+        
+        // Fallback to first gallery image
+        $galleryImage = $this->galleries()
+            ->with('images')
+            ->first()?->defaultImage();
+        
+        return $galleryImage?->ImageName 
+            ? asset('uploads/galleries/' . $galleryImage->ImageName)
+            : asset('images/no-property-image.jpg');
+    }
+
+    public function getOfficeHoursFormatted()
+    {
+        return $this->officehour ? nl2br(e($this->officehour)) : 'Not specified';
+    }
+
+    public function activeGalleries()
+    {
+        return $this->galleries()->where('Status', '1');
+    }
+
+    public function availableFloorPlans()
+    {
+        return $this->floorPlans()
+            ->where('Status', '1')
+            ->where('isavailable', 1);
+    }
 }

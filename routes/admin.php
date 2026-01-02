@@ -43,13 +43,24 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('properties', [PropertyController::class, 'index'])->name('properties.index');
         Route::get('properties-datatable', [PropertyController::class, 'datatable'])->name('properties.datatable');
         Route::get('properties/search',[PropertyController::class, 'search'])->name('properties.search');
-        Route::get('properties/{id}', fn() => 'show page')->name('properties.show');
-        Route::get('properties/{id}/edit', fn() => 'edit page')->name('properties.edit');
-
-
-
+        
+        // Property CRUD routes
         Route::get('add-property', [PropertyController::class, 'create'])->name('add.property');
         Route::post('store-property', [PropertyController::class, 'store'])->name('store.property');
-        // Route::get('active-properties', [PropertyController::class, 'activeProperties'])->name('active.property');
+        Route::get('properties/{id}/edit', [PropertyController::class, 'edit'])->name('properties.edit');
+        Route::put('properties/{id}', [PropertyController::class, 'update'])->name('properties.update');
+        Route::put('properties/{id}/general', [PropertyController::class, 'updateGeneral'])->name('properties.update.general');
+        Route::put('properties/{id}/additional', [PropertyController::class, 'updateAdditional'])->name('properties.update.additional');
+
+        // Floor Plans routes
+        Route::post('properties/{id}/floorplans', [PropertyController::class, 'storeFloorPlan'])->name('properties.floorplans.store');
+        Route::put('properties/{id}/floorplans/{floorPlanId}', [PropertyController::class, 'updateFloorPlan'])->name('properties.floorplans.update');
+        Route::delete('properties/{id}/floorplans/{floorPlanId}', [PropertyController::class, 'deleteFloorPlan'])->name('properties.floorplans.delete');
+
+        // Galleries routes
+        Route::post('properties/{id}/galleries', [PropertyController::class, 'storeGallery'])->name('properties.galleries.store');
+        Route::post('galleries/{galleryId}/images', [PropertyController::class, 'uploadGalleryImage'])->name('galleries.images.upload');
+        Route::delete('gallery-images/{imageId}', [PropertyController::class, 'deleteGalleryImage'])->name('galleries.images.delete');
+        Route::put('gallery-images/{imageId}/default', [PropertyController::class, 'setDefaultImage'])->name('galleries.images.set-default');
     });
 });

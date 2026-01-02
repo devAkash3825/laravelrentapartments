@@ -44,9 +44,63 @@ class PropertyFloorPlanDetail extends Model
         return $this->hasMany(GalleryDetails::class, 'floorplan_id', 'Id');
     }
 
-    /* Short helpers */
+    /* =====================
+     | Scopes
+     |=====================*/
+
+    public function scopeActive($query)
+    {
+        return $query->where('Status', '1');
+    }
+
+    public function scopeAvailable($query)
+    {
+        return $query->where('isavailable', 1);
+    }
+
+    /* =====================
+     | Helper Methods
+     |=====================*/
+
     public function isAvailable()
     {
         return $this->isavailable == 1;
+    }
+
+    public function getFormattedPrice()
+    {
+        return $this->Price ? '$' . number_format($this->Price) : 'N/A';
+    }
+
+    public function getFormattedFootage()
+    {
+        return $this->Footage ? number_format($this->Footage) . ' sq ft' : 'N/A';
+    }
+
+    public function isExpired()
+    {
+        if (!$this->expiry_date) {
+            return false;
+        }
+        
+        try {
+            return \Carbon\Carbon::parse($this->expiry_date)->isPast();
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    public function getFloorPlanImage()
+    {
+        if ($this->FloorPlan) {
+            return asset('uploads/floorplans/' . $this->FloorPlan);
+        }
+        
+        return asset('images/no-floorplan.jpg');
+    }
+
+    public function hasSpecial()
+    {
+        return !empty($this->special) && !$this->isExpired();
     }
 }

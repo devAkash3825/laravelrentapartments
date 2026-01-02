@@ -30,4 +30,31 @@ class GalleryDetails extends Model
     {
         return $this->belongsTo(PropertyFloorPlanDetail::class, 'floorplan_id', 'Id');
     }
+
+    /* =====================
+     | Helper Methods
+     |=====================*/
+
+    public function getImageUrl()
+    {
+        if ($this->ImageName) {
+            return asset('uploads/galleries/' . $this->ImageName);
+        }
+        return asset('images/no-image.jpg');
+    }
+
+    public function isDefault()
+    {
+        return $this->DefaultImage == '1';
+    }
+
+    public function isDisplayInGallery()
+    {
+        return $this->display_in_gallery == '1';
+    }
+
+    public function getImagePath()
+    {
+        return public_path('uploads/galleries/' . $this->ImageName);
+    }
 }

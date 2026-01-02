@@ -31,4 +31,30 @@ class GalleryType extends Model
     {
         return $this->images()->where('DefaultImage', '1')->first();
     }
+
+    /* =====================
+     | Scopes & Helper Methods
+     |=====================*/
+
+    public function activeImages()
+    {
+        return $this->images()->where('Status', '1');
+    }
+
+    public function galleryImages()
+    {
+        return $this->images()
+            ->where('Status', '1')
+            ->where('display_in_gallery', '1');
+    }
+
+    public function getImagesCount()
+    {
+        return $this->images()->where('Status', '1')->count();
+    }
+
+    public function hasImages()
+    {
+        return $this->getImagesCount() > 0;
+    }
 }
