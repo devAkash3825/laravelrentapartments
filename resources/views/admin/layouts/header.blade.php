@@ -11,8 +11,7 @@
         <div class="slim-header-right">
             <div class="dropdown dropdown-b">
                 <a href="" class="header-notification" data-toggle="dropdown">
-                    <i class="icon ion-ios-bell-outline"></i>
-                    <span class="indicator"></span>
+                    <i class="fa-regular fa-bell ml-3"></i>
                 </a>
                 <div class="dropdown-menu">
                     <div class="dropdown-menu-header">
@@ -103,41 +102,32 @@
                     <ul>
                         <li><a href="{{ route('admin.add.renter')}}">Add New Renter</a></li>
                         <li><a href="{{ route('admin.active.renter')}}">Active Renters</a></li>
-                        <li><a href="page-contact.html">Contact Manager</a></li>
-                        <li><a href="page-file-manager.html">File Manager</a></li>
-                        <li><a href="page-calendar.html">Calendar</a></li>
-                        <li><a href="page-timeline.html">Timeline</a></li>
-                        <li class="sub-with-sub">
-                            <a href="#">Pricing</a>
-                            <ul>
-                                <li><a href="page-pricing.html">Pricing 01</a></li>
-                                <li><a href="page-pricing2.html">Pricing 02</a></li>
-                                <li><a href="page-pricing3.html">Pricing 03</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-with-sub">
-                            <a href="page-signin.html">Sign In</a>
-                            <ul>
-                                <li><a href="page-signin.html">Signin Simple</a></li>
-                                <li><a href="page-signin2.html">Signin Split</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-with-sub">
-                            <a href="page-signup.html">Sign Up</a>
-                            <ul>
-                                <li><a href="page-signup.html">Signup Simple</a></li>
-                                <li><a href="page-signup2.html">Signup Split</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-with-sub">
-                            <a href="#">Error Pages</a>
-                            <ul>
-                                <li><a href="page-404.html">404 Not Found</a></li>
-                                <li><a href="page-505.html">505 Forbidden</a></li>
-                                <li><a href="page-500.html">500 Internal Server</a></li>
-                                <li><a href="page-503.html">503 Service Unavailable</a></li>
-                            </ul>
-                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item with-sub">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-building mr-1"></i>
+                    <span> Properties </span>
+                </a>
+                <div class="sub-item">
+                    <ul>
+                        <li><a href="{{ route('admin.properties.index')}}">List of properties </a></li>
+                        <li><a href="{{ route('admin.add.property')}}">Add Properties </a></li>
+                        <li><a href="{{ route('admin.properties.search')}}">Search Properties </a></li>
+
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item with-sub">
+                <a class="nav-link" href="#">
+                    <i class="fa-regular fa-folder-open mr-1"></i>
+                    <span> Resources </span>
+                </a>
+                <div class="sub-item">
+                    <ul>
+                        <li><a href="{{ route('admin.add.renter')}}">Add Manager </a></li>
+                        <li><a href="{{ route('admin.active.renter')}}">Search Manager </a></li>
                     </ul>
                 </div>
             </li>

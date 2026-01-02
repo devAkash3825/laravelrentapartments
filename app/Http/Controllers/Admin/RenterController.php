@@ -35,40 +35,7 @@ class RenterController extends Controller
     {
         return view('admin.renter.activeRenter');
     }
-    // public function activeRentersList(Request $request)
-    // {
-    //     $query = Login::query()
-    //         ->where('user_type', 'C')
-    //         ->where('Status', '1')
-    //         ->with('renterinfo')
-    //         ->select('Id', 'UserName', 'Status');
-
-    //     return DataTables::of($query)
-    //         ->addIndexColumn()
-
-    //         ->addColumn('Firstname', fn($row) => $row->renterinfo->Firstname ?? '-')
-    //         ->addColumn('Lastname', fn($row) => $row->renterinfo->Lastname ?? '-')
-    //         ->addColumn('probability', fn($row) => $row->renterinfo->probability ?? '-')
-    //         ->addColumn('adminname', fn($row) => $row->renterinfo->adminname ?? '-')
-
-    //         ->addColumn('status', function ($row) {
-    //             return $row->Status == 1
-    //                 ? '<span class="badge bg-success">Active</span>'
-    //                 : '<span class="badge bg-danger">Inactive</span>';
-    //         })
-
-    //         ->addColumn('actions', function ($row) {
-    //             return '
-    //                 <a href="#" class="btn btn-sm btn-info">View</a>
-    //                 <a href="#" class="btn btn-sm btn-primary">Edit</a>
-    //                 <button class="btn btn-sm btn-danger delete" data-id="' . $row->Id . '">Delete</button>
-    //             ';
-    //         })
-
-    //         ->rawColumns(['status', 'actions'])
-    //         ->make(true);
-    // }
-
+    
     public function activeRentersList(Request $request)
     {
         $query = Login::query()

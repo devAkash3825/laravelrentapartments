@@ -9,7 +9,9 @@
     <body>
         @include('admin.layouts.header')
         <div class="slim-mainpanel">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
         @include('admin.layouts.footer')
         @include('admin.layouts.scripts')

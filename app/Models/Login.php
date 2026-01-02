@@ -24,4 +24,9 @@ class Login extends Model
     {
         return $this->hasOne(RenterInfo::class, 'Login_ID', 'Id');
     }
+
+    public function propertyInfo()
+    {
+        return $this->hasMany(PropertyInfo::class, 'UserId', 'Id');
+    }
 }

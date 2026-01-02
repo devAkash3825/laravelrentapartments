@@ -2,17 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class State extends Model
 {
-    use HasFactory;
     protected $table = 'state';
-    protected $guarded = [];
+    protected $primaryKey = 'Id';
     public $timestamps = false;
-    
-    public function city(){
-        return $this->hasMany(City::class,'StateId');
+
+    protected $fillable = [
+        'StateName',
+        'StateCode',
+        'status',
+        'TimeZone'
+    ];
+
+    /* =====================
+     | Relationships
+     |=====================*/
+
+    public function cities()
+    {
+        return $this->hasMany(City::class, 'StateId', 'Id');
+    }
+
+    /* =====================
+     | Helpers
+     |=====================*/
+
+    public function isActive()
+    {
+        return $this->status === '1';
     }
 }
